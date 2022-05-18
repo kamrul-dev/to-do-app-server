@@ -18,6 +18,14 @@ async function run() {
         await client.connect();
         const taskCollections = client.db('toDoApp').collection('tasks')
         console.log("mongodb connected");
+
+        // post api for add task
+        app.post('/task', async (req, res) => {
+            const data = req.body;
+            const tasks = await taskCollections.insertOne(data)
+            res.send(tasks);
+        });
+
     }
     finally {
 
